@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'inicio',
     pathMatch: 'full'
   },
   {
@@ -12,12 +12,12 @@ const routes: Routes = [
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
   {
-    path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+    path: 'ingreso',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    path: 'registro',
+    loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
   },
   {
     path: 'about',
@@ -32,11 +32,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
   },
   {
-    path: 'logout',
-    loadChildren: () => import('./pages/logout/logout.module').then( m => m.LogoutPageModule)
-  },
-  
-  {
     path: 'contacto',
     loadChildren: () => import('./pages/contacto/contacto.module').then( m => m.ContactoPageModule)
   },
@@ -45,12 +40,17 @@ const routes: Routes = [
     loadChildren: () => import('./pages/page404/page404.module').then( m => m.Page404PageModule)
   },
   {
-    path: '**',
-    redirectTo: 'page404'
-  },   {
     path: 'conversor',
     loadChildren: () => import('./pages/conversor/conversor.module').then( m => m.ConversorPageModule)
-  }
+  },
+  {
+    path: 'salir',
+    redirectTo: 'inicio'
+  },
+  {
+    path: '**',
+    redirectTo: 'page404'
+  },
 
 ];
 

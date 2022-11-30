@@ -1,9 +1,16 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>inicio</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title slot="end">{{pageTitle}}</ion-title>
+    <img class="logoauto" src="../../../assets/img/logo asistencia duoc.png" alt="Logo" slot="end" class="logo">
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+<ion-content >
+  <ion-card class="ion-padding">
+    <img  src="../../../assets/img/construccion.jpg" class="Logo">
+  </ion-card>
 </ion-content>

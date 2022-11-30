@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ConversorPageRoutingModule } from './conversor-routing.module';
+import { RegistroRoutingModule } from './registro-routing.module';
 
-import { ConversorPage } from './conversor.page';
+import { Registro } from './registro.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { ComponentsModule } from 'src/app/components/components.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    ConversorPageRoutingModule,
-    ComponentsModule
+    RegistroRoutingModule,
+    ComponentsModule,
   ],
-  declarations: [ConversorPage]
+  declarations: [Registro]
 })
-export class ConversorPageModule {}
+export class RegistroPageModule {}

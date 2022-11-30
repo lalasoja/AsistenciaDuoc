@@ -4,23 +4,32 @@
       <ion-content>
         <ion-list id="inbox-list">
           <ion-list-header>Asistencia app</ion-list-header>
-          <ion-note>Laura@ionic.com</ion-note>
+          <ion-note>{{user_email}}</ion-note>
 
+          <ion-item>
+            <ion-icon slot="start" name="{{icon}}"></ion-icon>
+            <ion-label>
+              <h2>{{reporteClima}}</h2>
+              <p>{{descripcion}}</p>
+            </ion-label>
+          </ion-item>
+          
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
-        </ion-list>
-
-        <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
-
-          <ion-item *ngFor="let label of labels" lines="none">
-            <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-            <ion-label>{{ label }}</ion-label>
+          <ion-item *ngIf="logged; else nonLogged" button (click)="logOut()">
+            <ion-icon slot="start" name="log-out"></ion-icon>
+            <ion-label>Cerrar sesión</ion-label>
           </ion-item>
+          <ng-template #nonLogged>
+            <ion-item button (click)="goToLogin()">
+              <ion-icon slot="start" name="log-in"></ion-icon>
+              <ion-label>Iniciar sesión</ion-label>
+            </ion-item>
+          </ng-template>
         </ion-list>
       </ion-content>
     </ion-menu>

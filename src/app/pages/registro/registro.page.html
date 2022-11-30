@@ -1,0 +1,39 @@
+<app-header></app-header>
+<ion-content>
+<ion-card color="auto">
+<ion-card-title class="ion-text-center" color="warning">
+  <ion-label>
+    <h1>Crear una nueva cuenta</h1>
+  </ion-label>
+</ion-card-title>
+<ion-card-content>
+  <ion-item>
+    <ion-label position="floating">Ingrese e-mail</ion-label>
+    <ion-input [(ngModel)]="email" type="email" required placeholder="Correo electronico" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$">
+    </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Ingrese contraseña</ion-label>
+    <ion-input [(ngModel)]="password" type="password" required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Repita su contraseña</ion-label>
+    <ion-input [(ngModel)]="password_r" type="password" required></ion-input>
+  </ion-item>
+  <ion-item *ngIf="error_message !== undefined">
+    <ion-label><p>{{error_message}}</p></ion-label>
+  </ion-item>
+</ion-card-content>
+</ion-card>
+<ion-button shape="block" (click)="register()">
+  Registrarse
+</ion-button>
+<ion-button shape="block" [routerLink]="['/ingreso']" routerLinkActive="router-link-active">
+  Iniciar Sesión
+</ion-button>
+</ion-content>
+
+
+
+
+
