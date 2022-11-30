@@ -44,7 +44,7 @@ export class InicioPage implements OnInit {
 
   async ngOnInit() {
     const token = await this.storage.get('apikey');
-    if (token === '') {
+    if (token === '' || token === null) {
       this.router.navigate(['/ingreso']);
     }
     this.geolocation.getCurrentPosition().then((res) => {

@@ -21,7 +21,8 @@ export class LoginPage implements OnInit {
 
   async ngOnInit() {
     const token = await this.storage.get('apikey');
-    if (token !== '') {
+    console.log(token);
+    if (token !== '' && token !== null) {
       this.router.navigate(['/inicio']);
     }
   }
