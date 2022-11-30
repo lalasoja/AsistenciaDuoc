@@ -1,0 +1,31 @@
+
+<ion-content>
+<ion-card color="auto">
+<ion-card-title class="ion-text-center" color="warning">
+  <ion-label>
+    <h1>Bienvenido </h1>
+    <img class="logo" src="../../../assets/img/logoAsistencia.jpg" alt="">
+  </ion-label>
+</ion-card-title>
+<ion-card-content>
+  <ion-item class="redondeo sepa">
+    <ion-label position="floating">Ingrese usuario</ion-label>
+    <ion-input class="sepa" type="usuario" [(ngModel)]="user.usuario" required placeholder=" Nombre de Usuario">
+    </ion-input>
+  </ion-item>
+  <ion-item class="redondeo">
+    <ion-label position="floating">Ingrese contraseña</ion-label>
+    <ion-input type="password" [(ngModel)]="user.password" pattern="^(?=\w\d)(?=\w[A-Z])(?=\w*[a-z])\S{4,8}$"
+      required></ion-input>
+  </ion-item>
+</ion-card-content>
+</ion-card>
+<ion-button shape="block" (click)="login()">Iniciar Sesión</ion-button>
+<ion-button shape="block" (click)="register()" [routerLink]="['/error404']" routerLinkActive="router-link-active">
+Registrarse</ion-button>
+</ion-content>
+
+
+
+
+
