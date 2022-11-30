@@ -45,7 +45,7 @@ const routes: Routes = [
   },
   {
     path: 'salir',
-    redirectTo: 'inicio'
+    redirectTo: 'ingreso'
   },
   {
     path: '**',
