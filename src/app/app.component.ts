@@ -59,7 +59,7 @@ export class AppComponent {
       if (e instanceof NavigationEnd) {
         const previousLogged = this.logged;
         const actual_key = await this.storage.get('apikey');
-        this.logged = actual_key !== '';
+        this.logged = actual_key !== '' && actual_key !== null;
         if (!previousLogged && this.logged) {
           this.httpClient.get<any>('http://localhost:4500/dj-rest-auth/user/',
           {'headers': new HttpHeaders(
@@ -77,6 +77,16 @@ export class AppComponent {
           })
         } else if (previousLogged && !this.logged) {
           this.user_email = '';
+        }
+        const url = e.url;
+        if (url == '/inicio') {
+          if (!this.logged) {
+            this.router.navigate(['/ingreso']);
+          }
+        } else if (url == '/ingreso' || url == '/registro') {
+          if (this.logged) {
+            this.router.navigate(['/inicio']);
+          }
         }
       }
     });

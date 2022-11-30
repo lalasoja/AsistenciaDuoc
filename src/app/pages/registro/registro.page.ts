@@ -23,10 +23,10 @@ export class Registro implements OnInit {
   constructor(private storage: Storage, private httpClient: HttpClient, private router: Router) { }
 
   async ngOnInit() {
-    const token = await this.storage.get('apikey');
+    /*const token = await this.storage.get('apikey');
     if (token !== '' && token !== null) {
       this.router.navigate(['/inicio']);
-    }
+    }*/
   }
 
   async register() {

@@ -20,11 +20,11 @@ export class LoginPage implements OnInit {
   constructor(private storage: Storage, private router: Router, private httpClient: HttpClient) { }
 
   async ngOnInit() {
-    const token = await this.storage.get('apikey');
+    /*const token = await this.storage.get('apikey');
     console.log(token);
     if (token !== '' && token !== null) {
       this.router.navigate(['/inicio']);
-    }
+    }*/
   }
 
   async login() {

@@ -43,10 +43,10 @@ export class InicioPage implements OnInit {
   constructor(private geolocation: Geolocation, private httpClient: HttpClient, private storage: Storage, private router: Router) { }
 
   async ngOnInit() {
-    const token = await this.storage.get('apikey');
+    /*const token = await this.storage.get('apikey');
     if (token === '' || token === null) {
       this.router.navigate(['/ingreso']);
-    }
+    }*/
     this.geolocation.getCurrentPosition().then((res) => {
       this.updateWeather(res.coords.latitude, res.coords.longitude)
      }).catch((error) => {
