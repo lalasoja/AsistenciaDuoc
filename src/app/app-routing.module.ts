@@ -45,7 +45,19 @@ const routes: Routes = [
   },
   {
     path: 'salir',
-    redirectTo: 'ingreso'
+    redirectTo: 'inicio'
+  },
+  {
+    path: 'cursos',
+    loadChildren: () => import('./pages/courses/courses.module').then( m => m.CoursesPageModule)
+  },
+  {
+    path: 'sesion',
+    loadChildren: () => import('./pages/session/session.module').then( m => m.SessionPageModule)
+  },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
     path: '**',

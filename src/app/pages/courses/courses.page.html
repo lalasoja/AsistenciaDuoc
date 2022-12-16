@@ -1,0 +1,67 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Cursos</ion-title>
+    <img class="" src="../../../assets/img/logo asistencia duoc.png" alt="Logo" slot="end" class="logo">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      <h2>Cursos disponibles</h2>
+    </ion-list-header>
+    <ng-container *ngIf="actualCourses.length > 0">
+    <ng-container *ngFor="let course of actualCourses">
+      <ion-item>
+        <ion-label>
+          <h3>{{course.name}} | {{course.teacher_first_name}} {{course.teacher_last_name}}</h3>
+          <p>({{course.students_count}} inscritos) {{course.description}}</p>
+        </ion-label>
+        <ion-chip *ngIf="!isTeacher && !course.is_student" (click)="joinCourse(course.id)">Unirse</ion-chip>
+        <ion-chip *ngIf="course.is_teacher && !course.is_active" (click)="createSession(course.id)">Crear nueva sesión</ion-chip>
+        <ion-chip *ngIf="course.is_active" disabled>Sesión activa</ion-chip>
+      </ion-item>
+    </ng-container>
+    </ng-container>
+  </ion-list>
+    
+  <form *ngIf="isTeacher" [formGroup]="courseForm" (ngSubmit)="createCourseForm(courseForm.value)">
+    <ion-list lines="none">
+      <ion-list-header>
+        <h2>Crear curso</h2>
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Nombre:</ion-label>
+        <ion-input formControlName="name" [clearInput]="true" placeholder="Nombre del curso"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Descripción:</ion-label>
+        <ion-input formControlName="description" [clearInput]="true" placeholder="Descripción del curso"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Fecha de inicio</ion-label>
+        <ion-datetime-button datetime="start_date"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime formControlName="startDate" id="start_date"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+      <ion-item>
+        <ion-label>Fecha de cierre</ion-label>
+        <ion-datetime-button datetime="end_date"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime formControlName="endDate" id="end_date"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+      <ion-item>
+        <ion-button type="ngSubmit">Crear curso</ion-button>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

@@ -39,6 +39,9 @@ export class AppComponent {
   public appPages = [
     { title: 'Inicio', url: '/inicio', icon: 'home' },
     { title: 'Nosotros', url: '/about', icon: 'people' },
+    { title: 'Cursos', url: '/cursos', icon: 'school' },
+    { title: 'Sesion', url: '/sesion', icon: 'create' },
+    { title: 'Perfil', url: '/perfil', icon: 'person' },
     { title: 'Contacto', url: '/contacto', icon: 'mail' },
     { title: 'Conversor', url: '/conversor', icon: 'cash' }
     
@@ -59,34 +62,26 @@ export class AppComponent {
       if (e instanceof NavigationEnd) {
         const previousLogged = this.logged;
         const actual_key = await this.storage.get('apikey');
-        this.logged = actual_key !== '' && actual_key !== null;
+        this.logged = actual_key !== '';
         if (!previousLogged && this.logged) {
-          this.httpClient.get<any>('http://localhost:4500/dj-rest-auth/user/',
+          this.httpClient.get<any>('http://45.33.100.248:8000/dj-rest-auth/user/',
           {'headers': new HttpHeaders(
               {'Content-Type':'application/json', 'Authorization': `Token ${actual_key}`}
             )
           })
           .subscribe({
-            next: res => {
+            next: async res => {
                 this.user_email = res.email;
+                await this.storage.set('profile_data', {first_name: res.first_name, last_name: res.last_name, profile_picture: res.profile_picture, role: res.role})
               },
             error: error => {
               console.log(error);
               this.logged = false;
+              this.logOut();
             }
           })
         } else if (previousLogged && !this.logged) {
           this.user_email = '';
-        }
-        const url = e.url;
-        if (url == '/inicio') {
-          if (!this.logged) {
-            this.router.navigate(['/ingreso']);
-          }
-        } else if (url == '/ingreso' || url == '/registro') {
-          if (this.logged) {
-            this.router.navigate(['/inicio']);
-          }
         }
       }
     });
@@ -115,6 +110,7 @@ export class AppComponent {
   async logOut() {
     console.log('Cerrando sesión...');
     await this.storage.set('apikey', '');
+    await this.storage.set('profile_data', undefined);
     this.router.navigate(['/salir']);
   }
 

@@ -14,10 +14,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { ComponentsModule } from './components/components.module';
 import { HeaderComponent } from './components/header/header.component';
 
+import { QRCodeModule } from 'angularx-qrcode';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [HeaderComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ComponentsModule, IonicStorageModule.forRoot()],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ComponentsModule, IonicStorageModule.forRoot(), QRCodeModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, {provide: Geolocation, useClass: Geolocation}],
   bootstrap: [AppComponent],
 })

@@ -15,6 +15,8 @@ export class Registro implements OnInit {
   pageTitle:'Registro';
 
   email: string;
+  first_name: string;
+  last_name: string;
   password: string;
   password_r: string;
 
@@ -23,13 +25,13 @@ export class Registro implements OnInit {
   constructor(private storage: Storage, private httpClient: HttpClient, private router: Router) { }
 
   async ngOnInit() {
-    /*const token = await this.storage.get('apikey');
-    if (token !== '' && token !== null) {
+    const token = await this.storage.get('apikey');
+    if (token !== '') {
       this.router.navigate(['/inicio']);
-    }*/
+    }
   }
 
-  async register() {
+  async register(option: string) {
 
     //const newLocal = await this.storage.get('test');
 
@@ -42,8 +44,16 @@ export class Registro implements OnInit {
       return
     }
 
-    this.httpClient.post<any>('http://localhost:4500/dj-rest-auth/registration/',
-      {username: undefined, email: this.email, password1: this.password, password2: this.password_r}
+    this.httpClient.post<any>('http://45.33.100.248:8000/dj-rest-auth/registration/',
+      {
+        username: undefined,
+        first_name: this.first_name,
+        last_name: this.last_name,
+        role: option,
+        email: this.email,
+        password: this.password,
+        password2: this.password_r
+      }
     ).subscribe({
         next: async res => {
           await this.storage.set('apikey', res['key']);

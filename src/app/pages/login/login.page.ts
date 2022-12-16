@@ -20,11 +20,10 @@ export class LoginPage implements OnInit {
   constructor(private storage: Storage, private router: Router, private httpClient: HttpClient) { }
 
   async ngOnInit() {
-    /*const token = await this.storage.get('apikey');
-    console.log(token);
-    if (token !== '' && token !== null) {
+    const token = await this.storage.get('apikey');
+    if (token !== '') {
       this.router.navigate(['/inicio']);
-    }*/
+    }
   }
 
   async login() {
@@ -33,7 +32,7 @@ export class LoginPage implements OnInit {
       return
     }
 
-    this.httpClient.post<any>('http://localhost:4500/dj-rest-auth/login/',
+    this.httpClient.post<any>('http://45.33.100.248:8000/dj-rest-auth/login/',
       {email: this.email, password: this.password,}
     ).subscribe({
         next: async res => {

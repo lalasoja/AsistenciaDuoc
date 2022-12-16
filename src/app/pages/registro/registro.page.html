@@ -1,4 +1,13 @@
-<app-header></app-header>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Registro</ion-title>
+    <img class="" src="../../../assets/img/logo asistencia duoc.png" alt="Logo" slot="end" class="logo">
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
 <ion-card color="auto">
 <ion-card-title class="ion-text-center" color="warning">
@@ -12,6 +21,24 @@
     <ion-input [(ngModel)]="email" type="email" required placeholder="Correo electronico" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$">
     </ion-input>
   </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Primer nombre</ion-label>
+          <ion-input [(ngModel)]="first_name" required placeholder="Nombre">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col> 
+        <ion-item>
+          <ion-label position="floating">Apellido</ion-label>
+          <ion-input [(ngModel)]="last_name" required placeholder="Apellido">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-item>
     <ion-label position="floating">Ingrese contraseña</ion-label>
     <ion-input [(ngModel)]="password" type="password" required></ion-input>
@@ -25,12 +52,27 @@
   </ion-item>
 </ion-card-content>
 </ion-card>
-<ion-button shape="block" (click)="register()">
-  Registrarse
-</ion-button>
-<ion-button shape="block" [routerLink]="['/ingreso']" routerLinkActive="router-link-active">
-  Iniciar Sesión
-</ion-button>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-button shape="block" (click)="register('PF')">
+        Registrarse como profesor
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button shape="block" (click)="register('ST')">
+        Registrarse como estudiante
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-button shape="block" [routerLink]="['/ingreso']" routerLinkActive="router-link-active">
+        Iniciar Sesión
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 </ion-content>
 
 

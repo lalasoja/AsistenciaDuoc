@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Sesiones</ion-title>
+    <img class="" src="../../../assets/img/logo asistencia duoc.png" alt="Logo" slot="end" class="logo">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      <h3>
+        Sesiones activas
+      </h3>
+    </ion-list-header>
+    <ion-card class="asistencia-qr">
+      <qrcode *ngIf="displayQR != null && isTeacher" [qrdata]="displayQR" [width]="300" [errorCorrectionLevel]="'Q'"></qrcode>
+    </ion-card>
+    <ion-card *ngIf="displayQR != null && isTeacher">
+      <ion-label>O puedes utilizar el siguiente código: {{displayQR}}</ion-label>
+    </ion-card>
+    <ng-container *ngFor="let session of actualSessions">
+      <ion-item>
+        <ion-label>
+          <h3>{{session.course_name}}</h3>
+          <p>{{session.assistants_count}} asistentes</p>
+        </ion-label>
+        <ion-chip *ngIf="isTeacher && session.active" (click)="closeSession(session.id)">Finalizar</ion-chip>
+        <ion-chip *ngIf="isTeacher && session.active" (click)="showQR(session.id)">Mostrar QR</ion-chip>
+        <ion-chip *ngIf="!isTeacher && session.active && session.is_student && !session.is_assistant">Activa</ion-chip>
+        <ion-chip *ngIf="!isTeacher && session.active && session.is_assistant" disabled>Asistida</ion-chip>
+        <ion-chip *ngIf="!session.active" disabled>Finalizada</ion-chip>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+
+  <ion-item>
+    <ion-label>
+      <h3>Registrar asistencia</h3>
+      <p>{{returnMessage}}</p>
+    </ion-label>
+    <ion-input [(ngModel)]="code" placeholder="Código de asistencia"></ion-input>
+    <ion-icon *ngIf="isNative" name="camera" (click)="addValue()"></ion-icon>
+    <ion-icon name="create" (click)="submitAssistance()"></ion-icon>
+  </ion-item>
+
+</ion-content>
