@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Storage } from '@ionic/storage-angular';
 
+import { Router } from '@angular/router';
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
@@ -23,9 +25,13 @@ export class SessionPage implements OnInit {
   code: string;
   returnMessage: string;
 
-  constructor(private httpClient: HttpClient, private storage: Storage) { }
+  constructor(private httpClient: HttpClient, private storage: Storage, private router: Router) { }
 
   async ngOnInit() {
+    const token = await this.storage.get('apikey');
+    if (token === '') {
+      this.router.navigate(['/ingreso']);
+    }
     this.isNative = Capacitor.isNativePlatform();
     const profile_data = await this.storage.get('profile_data');
     if ((profile_data != null) && (profile_data.role == "PF")) {

@@ -11,6 +11,6 @@
 
 <ion-content >
   <ion-card class="ion-padding">
-    <img  src="../../../assets/img/construccion.jpg" class="Logo">
+    <h3 *ngIf="profile_data != null">Bienvenid@ {{profile_data.first_name}} {{profile_data.last_name}}!</h3>
   </ion-card>
 </ion-content>

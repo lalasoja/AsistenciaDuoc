@@ -36,7 +36,7 @@
     </ng-container>
   </ion-list>
 
-  <ion-item>
+  <ion-item *ngIf="!isTeacher">
     <ion-label>
       <h3>Registrar asistencia</h3>
       <p>{{returnMessage}}</p>

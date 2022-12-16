@@ -39,10 +39,12 @@ export class InicioPage implements OnInit {
   tempMax: number;
   icon: string;
   descripcion: string;
+  profile_data;
 
   constructor(private geolocation: Geolocation, private httpClient: HttpClient, private storage: Storage, private router: Router) { }
 
   async ngOnInit() {
+    this.profile_data = await this.storage.get('profile_data');
     const token = await this.storage.get('apikey');
     if (token === '') {
       this.router.navigate(['/ingreso']);

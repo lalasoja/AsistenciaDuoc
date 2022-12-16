@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { Storage } from '@ionic/storage-angular';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { FormGroup, FormControl } from '@angular/forms';
 
@@ -17,9 +18,13 @@ export class CoursesPage implements OnInit {
   isTeacher = false;
   actualCourses = [];
 
-  constructor(private httpClient: HttpClient, private storage: Storage) { }
+  constructor(private httpClient: HttpClient, private storage: Storage, private router: Router) { }
 
   async ngOnInit() {
+    const token = await this.storage.get('apikey');
+    if (token === '') {
+      this.router.navigate(['/ingreso']);
+    }
     this.formatDateValues();
     const profile_data = await this.storage.get('profile_data');
     if ((profile_data != null) && (profile_data.role == "PF")) {

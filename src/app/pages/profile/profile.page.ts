@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Storage } from '@ionic/storage-angular';
 
+import { Router } from '@angular/router';
+
 import { PhotoService } from 'src/app/services/photo.service';
 
 @Component({
@@ -19,9 +21,13 @@ export class ProfilePage implements OnInit {
   profile_picture: string;
   error_message: string;
 
-  constructor(public photoService: PhotoService, private storage: Storage, private httpClient: HttpClient) { }
+  constructor(public photoService: PhotoService, private storage: Storage, private httpClient: HttpClient, private router: Router) { }
 
   async ngOnInit() {
+    const token = await this.storage.get('apikey');
+    if (token === '') {
+      this.router.navigate(['/ingreso']);
+    }
     const profile_data = await this.storage.get('profile_data');
     this.first_name = profile_data.first_name;
     this.last_name = profile_data.last_name;
